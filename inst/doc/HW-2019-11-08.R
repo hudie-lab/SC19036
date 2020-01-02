@@ -1,0 +1,86 @@
+## ----include=TRUE-------------------------------------------------------------
+library(bootstrap)
+data=scor
+pairs(data,main="scatter plots of each pair")
+####the sample correlation matrix
+cor(data)
+
+## ----include=TRUE-------------------------------------------------------------
+####the number of samples
+n=nrow(data)
+####the number of bootstrap samples
+B=1000
+corfunc=function(x,xdata)
+  { cor(xdata[x,1],xdata[x,2]) }
+ro12=bootstrap(1:n,B,corfunc,data[,1:2])
+ro34=bootstrap(1:n,B,corfunc,data[,3:4])
+ro35=bootstrap(1:n,B,corfunc,data[,c(3,5)])
+ro45=bootstrap(1:n,B,corfunc,data[,4:5])
+
+####the estimate standard error of correlation r012
+sd(ro12$thetastar)
+####the estimate standard error of correlation r034
+sd(ro34$thetastar)
+####the estimate standard error of correlation r035
+sd(ro35$thetastar)
+####the estimate standard error of correlation r045
+sd(ro45$thetastar)
+
+## ----include=TRUE-------------------------------------------------------------
+library(boot)
+n=50
+B=1000
+sk <- function(x,i) {
+#computes the sample skewness coeff.
+  x1=x[i]
+xbar <- mean(x1)
+m3 <- mean((x1 - xbar)^3)
+m2 <- mean((x1 - xbar)^2)
+return( m3 / m2^1.5 )
+}
+
+####generate the data ~ normal distribution
+x1=rnorm(n)
+re1=boot(x1,sk,R=B)
+####confidence interval
+ci=boot.ci(re1,type=c("norm","basic","perc"))
+ci
+
+## ----include=TRUE-------------------------------------------------------------
+####for normal distribution
+####the simulation is m rounds
+m=1000
+mu=0
+ci.norm<-ci.basic<-ci.perc<-matrix(NA,m,2)
+for(i in 1:m){
+  x1=rnorm(n)
+re1=boot(x1,sk,R=B)
+  ci=boot.ci(re1,type=c("norm","basic","perc"))
+  ci.norm[i,]<-ci$norm[2:3]
+  ci.basic[i,]<-ci$basic[4:5]
+  ci.perc[i,]<-ci$percent[4:5]
+}
+cat('norm =',mean(ci.norm[,1]<=mu & ci.norm[,2]>=mu),
+'basic =',mean(ci.basic[,1]<=mu & ci.basic[,2]>=mu), 'perc =',mean(ci.perc[,1]<=mu & ci.perc[,2]>=mu))
+
+
+
+## ----include=TRUE-------------------------------------------------------------
+####for chisq(5) distribution
+####the simulation is m rounds
+m=1000
+#####estimate the theory skewness of chisq(5)
+mu=sk(rchisq(10000,df=5),1:10000)
+ci.norm<-ci.basic<-ci.perc<-matrix(NA,m,2)
+for(i in 1:m){
+  x1=rchisq(n,df=5)
+re1=boot(x1,sk,R=B)
+  ci=boot.ci(re1,type=c("norm","basic","perc"))
+  ci.norm[i,]<-ci$norm[2:3]
+  ci.basic[i,]<-ci$basic[4:5]
+  ci.perc[i,]<-ci$percent[4:5]
+}
+cat('norm =',mean(ci.norm[,1]<=mu & ci.norm[,2]>=mu),
+'basic =',mean(ci.basic[,1]<=mu & ci.basic[,2]>=mu), 'perc =',mean(ci.perc[,1]<=mu & ci.perc[,2]>=mu))
+
+

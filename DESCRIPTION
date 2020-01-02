@@ -1,0 +1,16 @@
+Package: SC19036
+Type: Package
+Title: The R Package For StatComp
+Version: 10.0
+Date: 2019-12-31
+Author: Hu Die
+Maintainer: Hu Die <janehoe@mail.ustc.edu.cn>
+Description: The R package for the homework answers in StatComp curriculum.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.3), microbenchmark, DAAG, MASS, boot, bootstrap, rgl, parallel
+LinkingTo: Rcpp
+RoxygenNote: 7.0.2
+Encoding: UTF-8
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+URL: http://github.com/hudie-lab/SC19036

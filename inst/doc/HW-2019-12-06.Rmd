@@ -1,0 +1,153 @@
+---
+author: "Hu Die"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{HW-2019-12-06}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## question1
+![](1206q1.png)
+```{r , include=TRUE}
+x <- seq(1:10)
+y1 <- exp(log(x))
+y2 <- log(exp(x))
+identical(y1,y2)
+all.equal(y1,y2)
+```
+
+## qestion2
+![](1206q2.png)
+#### the points in Exercise 11.4
+
+```{r,include=TRUE}
+k <- c(4:25,100, 500, 1000)
+sk <- function(k,a) 1 - pt(sqrt(a^2*k/(k+1-a^2)), df = k)
+intersec_sk <- function(k,a) {
+  sk(k,a) - sk(k-1,a)
+}
+solution <- numeric(length(k))
+for( i in 1:length(k)){
+  m <- k[i] 
+  n <- sqrt(m-1)
+  solution[i] <- uniroot(intersec_sk, k = m, c(0.00001,n + 0.00001))$root
+}
+knitr::kable(cbind(k,solution))
+```
+
+#### the points in Exercise 11.5
+```{r,include=TRUE}
+ck <- function(k,a) sqrt(a^2*k/(k+1-a^2))
+f1 <- function(k,a) {
+  cka <- ck(k-1,a)
+  co <- exp(lgamma(k/2)-lgamma((k-1)/2))/sqrt(k-1)
+  f <- function(k,u) (1+(u^2)/(k-1))^(-k/2)
+  int <- integrate(f, lower = 0, upper = cka ,k=k)$value
+  return(co*int)
+}
+f2 <- function(k,a){
+  cka <- ck(k,a)
+  co <- exp(lgamma((k+1)/2)-lgamma(k/2))/sqrt(k)
+  f <- function(k,u) (1+(u^2)/(k))^(-k/2-0.5)
+  int <- integrate(f, lower = 0, upper = cka ,k=k)$value
+  return(co*int)
+}
+
+solv <- function(k,a){
+  f1(k,a) - f2(k,a)
+}
+k <- c(4:25,100, 500, 1000)
+solution1 <- numeric(length(k))
+for( i in 1:length(k)){
+  m <- k[i] 
+  n <- sqrt(m-1)
+  upp <- n
+  tol <- 10^(-5)
+  if(abs(solv(m,upp)) <= tol) solution1[i] <- upp
+  else solution1[i] <- uniroot(solv, k = m,c(0.00001,upp), tol = 10^(-5) )$root
+}
+knitr::kable(cbind(k,solution,solution1))
+```
+
+From the results, we can see that with k -> infinite, the points in 11.4 and 11.5 are more closed. But when k is small, the difference of results are large. Because in 11.5, the deviance of the right and left formula is monotone within the district.
+
+## qestion3
+![](1206q3.png)
+
+- Observed data likelihood
+
+$$  L(p,q|n_{A.},n_{B.},n_{OO},n_{AB})=(p^2+2p(1-p-q))^{n_{A.}}
+  (q^2+2q(1-p-q))^{n_{B.}}((1-p-q)^2)^{n_{OO}}(2pq)^{n_{AB}}$$ 
+  
+- Complete data likelihood
+
+$$ L(p,q|n_{AA},n_{AO},n_{BB},n_{BO},n_{OO}.n_{AB})=(p^2)^{n_{AA}}(2p(1-p-q))^{n_{AO}}(q^2)^{n_{BB}}(2q(1-p-q))^{n_{BO}}((1-p-q)^2)^{n_{OO}}(2pq)^{n_{AB}}$$
+
+$$ l(p,q|n_{AA},n_{AO},n_{BB},n_{BO},n_{OO}.n_{AB}) \propto  2n_{AA}log(p)+n_{AO}log(p(1-p-q))+
+ 2n_{BB}log(q)+n_{BO}log(q(1-p-q))+2n_{OO}log(1-p-q)+n_{AB}log(pq) $$
+
+-
+$$ l(p,q|n_{AA},n_{AO},n_{BB},n_{BO},n_{OO}.n_{AB}) \propto  n_{AA}log(\frac{p}{1-p-q})+n_{A.}log(p(1-p-q))+
+ n_{BB}log(\frac{q}{1-p-q})+n_{B.}log(q(1-p-q))+2n_{OO}log(1-p-q)+n_{AB}log(pq)  $$
+
+ in which $n_{AA}$ and $n_{BB}$ are unknown. 
+
+since $n_{AA}|n_{A.} \sim B(n_{A.},\frac{p}{p+2r})$,i.e, $B(n_{A.},\frac{p}{2-p-2q})$ and so is the same with $n_{BB}|n_{B.} \sim B(n_{B.},\frac{q}{2-2p-q})$.
+we can get $\hat{n}_{AA}=$
+
+- initial step : set $\hat{p}_0$ and $\hat{q}_0$.
+- E-step : take $\hat{n}_{AA}=n_{A.}\frac{\hat{p}_0}{2-\hat{p}_0-2\hat{q}_0}$ and $\hat{n}_{BB}=n_{B.}\frac{\hat{q}_0}{2-\hat{q}_0-2\hat{p}_0}$ into the expectational log-likelihood function:
+  $$E_{\hat{p}_0,\hat{q}_0}[l(p,q|n_                                                                                                                                                                                                                                                                                                           {AA},n_{AO},n_{BB},n_{BO},n_{OO}.n_{AB})] \propto  n_{A.}\frac{\hat{p}_0}{2-\hat{p}_0-2\hat{q}_0}log(\frac{p}{1-p-q})+n_{A.}log(p(1-p-q))+
+ $$
+ $$n_{B.}\frac{\hat{q}_0}{2-\hat{q}_0-2\hat{p}_0}log(\frac{q}{1-p-q})+
+  n_{B.}log(q(1-p-q))+2n_{OO}log(1-p-q)+n_{AB}log(pq) $$
+
+ and here we set $k1=n_{A.}\frac{\hat{p}_0}{2-\hat{p}_0-2\hat{q}_0}$, $k_2=n_{A.}$, $k_3=n_{B.}\frac{\hat{q}_0}{2-\hat{q}_0-2\hat{p}_0}$, $k_4=n_{B.}$, $k_5=n_{OO}$, $k_6=n_{AB}$,
+ then set $a=k_1+k_2+k_6$, $b=k_2+k_4+k_5-k_1-k_3$, $c=k_3+k_4+k_6$.
+- M-step : maximize the function in E-step to get the estimate of $p$ and $q$:
+  $$\hat{p}_1= \frac{a}{a+b+c}$$
+  $$\hat{q}_1= \frac{c}{a+b+c}$$
+```{r,include=TRUE}
+na <- 28
+nb <- 24
+no <- 41
+nab <- 70
+L <- c(0.3,0.3)
+N <- 10000
+tol <- .Machine$double.eps^0.5
+L.old <- L 
+
+logml <- numeric()
+
+for(j in 1:N){
+  naa <- na*L.old[1]/(2-L.old[1]-2*L.old[2])
+  nbb <- nb*L.old[2]/(2-L.old[2]-2*L.old[1])
+  a <- naa + na + nab
+  c <- nbb + nb + nab
+  b <- na + nb + no - naa - nbb
+  L <- c(a/(a+b+c), c/(a+b+c))
+  logml[j] <- a*log(L[1])+c*log(L[2])+b*log(1-L[1]-L[2])#+log(2)*(nab+na+nb-naa-nbb)
+  
+  if (sum((L - L.old)^2) < tol) break
+  L.old <- L
+}
+
+result <- list()
+result$interate <- j ##the times for interation
+result$p <- L[1]  ##the estimate of p
+result$q <- L[2]  ##the estimate of q
+result$logml <- logml ## the maximum of the log-likelihood of each interation
+result
+plot(logml,type="l",main = "the log-maximum likelihood values")
+```
+
+
+
+
+
+
+
+
+

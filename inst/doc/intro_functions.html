@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Hu Die" />
+
+<meta name="date" content="2020-01-02" />
+
+<title>intro_functions.utf8</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>There are four functions in this package accorded with the research based on the <strong>Yang J, Lee SH, Goddard ME, Visscher PM (2011) GCTA: a tool for genome-wide complex trait analy- sis. Am J Hum Genet 88: 76–82. doi: 10.1016/j.ajhg.2010.11.011 PMID: 21167468</strong>. These functions aim to simulate the family file, relationship file, genotype file and environment relationship matrix file. So that the outputs can be analyzed in the Variance Component Analysis in <strong>GCTA</strong> from the reference paper.</p>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<div id="fam_genera" class="section level4">
+<h4>fam_genera()</h4>
+<p>This function is to simulate the family file which is a data.frame output containing five columns: Family_ID, Individual_ID, Paternal_ID, Maternal_ID and Sex. With the input <strong>n</strong>, the number of the families, the output would generate the five kinds of information of <strong>4n</strong> individuals for every family is set to consist of two parents and two children.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">fam_genera &lt;-<span class="st"> </span><span class="cf">function</span>(n){</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  fid &lt;-<span class="st"> </span><span class="kw">rep</span> (<span class="dv">1</span><span class="op">:</span>n ,<span class="dv">4</span> )</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  iid &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>,n),<span class="kw">rep</span>(<span class="dv">2</span>,n),<span class="kw">rep</span>(<span class="dv">3</span>,n),<span class="kw">rep</span>(<span class="dv">4</span>,n))</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  iid &lt;-<span class="st"> </span><span class="kw">paste0</span>(fid,<span class="kw">paste0</span>(<span class="st">&quot;000&quot;</span>,iid))</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  pid &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="op">*</span>n)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  mid &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">2</span>,<span class="dv">2</span><span class="op">*</span>n)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  pid &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">2</span><span class="op">*</span>n),<span class="kw">paste0</span>(fid[<span class="dv">1</span><span class="op">:</span>(<span class="dv">2</span><span class="op">*</span>n)],<span class="kw">paste0</span>(<span class="st">&quot;000&quot;</span>,pid)))</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  mid &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">2</span><span class="op">*</span>n),<span class="kw">paste0</span>(fid[<span class="dv">1</span><span class="op">:</span>(<span class="dv">2</span><span class="op">*</span>n)],<span class="kw">paste0</span>(<span class="st">&quot;000&quot;</span>,mid)))</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  sex &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>,n),<span class="kw">rep</span>(<span class="dv">2</span>,n),<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">2</span><span class="op">*</span>n,<span class="dt">replace=</span><span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">  fam &lt;-<span class="st"> </span><span class="kw">data.frame</span>(fid,iid,pid,mid,sex)</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">  fam &lt;-<span class="st"> </span>fam[<span class="kw">order</span>(fam<span class="op">$</span>fid),]</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">  <span class="kw">return</span>(fam)</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">}</a></code></pre></div>
+<p>Set <strong>n=50</strong>, and <strong>head(result)</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(SC19036)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">result &lt;-<span class="st"> </span><span class="kw">fam_genera</span>(n)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">head</span>(result)</a></code></pre></div>
+<pre><code>##     fid   iid   pid   mid sex
+## 1     1 10001     0     0   1
+## 51    1 10002     0     0   2
+## 101   1 10003 10001 10002   2
+## 151   1 10004 10001 10002   1
+## 2     2 20001     0     0   1
+## 52    2 20002     0     0   2</code></pre>
+</div>
+<div id="fam_relation" class="section level4">
+<h4>fam_relation()</h4>
+<p>This function is to generate the family relationship based on the file by <strong>fam_genera()</strong>. With every family containing two parents and two children, there would be six pairs of relationships: “couple”,“parentOffspring”,“parentOffspring”,“parentOffspring”, “parentOffspring” , “fullSib” standing for the relationship between the parents, between the parent and a child between and the children. And the output is a data.frame with four columns: Family_ID, Individual_ID1, Individual_ID2, Relationship. Then this out put could be used for generating the <strong>environment relationship matrix</strong>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">fam_relation &lt;-<span class="st"> </span><span class="cf">function</span> (fam){</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="kw">nrow</span>(fam)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  fam[,<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(fam[,<span class="dv">1</span>]))</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  fam[,<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(fam[,<span class="dv">2</span>]))</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  fid &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">unique</span>(fam[,<span class="dv">1</span>]),<span class="dt">each=</span><span class="dv">6</span>)[<span class="dv">1</span><span class="op">:</span>(<span class="dv">6</span><span class="op">*</span>n<span class="op">/</span><span class="dv">4</span>)]</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  iid1 &lt;-<span class="st"> </span>iid2 &lt;-<span class="st"> </span>relationship &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(<span class="kw">unique</span>(fid))){</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    </a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">    a &lt;-<span class="st"> </span><span class="kw">unique</span>(fid)[i]</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">    l &lt;-<span class="st"> </span><span class="kw">unique</span>(fam[<span class="kw">which</span>(fam[,<span class="dv">1</span>]<span class="op">==</span>a),<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">    iid1[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>l[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">    iid2[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>l[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">    iid1[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">2</span>] &lt;-<span class="st"> </span>l[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">    iid2[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">2</span>] &lt;-<span class="st"> </span>l[<span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">    iid1[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">3</span>] &lt;-<span class="st"> </span>l[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">    iid2[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">3</span>] &lt;-<span class="st"> </span>l[<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">    iid1[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">4</span>] &lt;-<span class="st"> </span>l[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">    iid2[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">4</span>] &lt;-<span class="st"> </span>l[<span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb4-19" data-line-number="19">    iid1[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">5</span>] &lt;-<span class="st"> </span>l[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb4-20" data-line-number="20">    iid2[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">5</span>] &lt;-<span class="st"> </span>l[<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb4-21" data-line-number="21">    iid1[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">6</span>] &lt;-<span class="st"> </span>l[<span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb4-22" data-line-number="22">    iid2[(i<span class="dv">-1</span>)<span class="op">*</span><span class="dv">6</span><span class="op">+</span><span class="dv">6</span>] &lt;-<span class="st"> </span>l[<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb4-23" data-line-number="23">  }</a>
+<a class="sourceLine" id="cb4-24" data-line-number="24">  relationship &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;couple&quot;</span>,<span class="st">&quot;parentOffspring&quot;</span>,<span class="st">&quot;parentOffspring&quot;</span>,</a>
+<a class="sourceLine" id="cb4-25" data-line-number="25">                        <span class="st">&quot;parentOffspring&quot;</span>, <span class="st">&quot;parentOffspring&quot;</span> , <span class="st">&quot;fullSib&quot;</span> ),<span class="kw">length</span>(<span class="kw">unique</span>(fid)))</a>
+<a class="sourceLine" id="cb4-26" data-line-number="26">  re &lt;-<span class="st"> </span><span class="kw">data.frame</span>(fid,iid1,iid2,relationship)</a>
+<a class="sourceLine" id="cb4-27" data-line-number="27">  </a>
+<a class="sourceLine" id="cb4-28" data-line-number="28">  <span class="kw">return</span>(re)</a>
+<a class="sourceLine" id="cb4-29" data-line-number="29">  </a>
+<a class="sourceLine" id="cb4-30" data-line-number="30">}</a></code></pre></div>
+<p>Use the <strong>result</strong> generated by <strong>fam_genera()</strong> to be the input here, and show the <strong>head(relation)</strong>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(SC19036)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">relation &lt;-<span class="st"> </span><span class="kw">fam_relation</span>(result)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">head</span>(relation)</a></code></pre></div>
+<pre><code>##   fid  iid1  iid2    relationship
+## 1   1 10001 10002          couple
+## 2   1 10001 10003 parentOffspring
+## 3   1 10001 10004 parentOffspring
+## 4   1 10002 10003 parentOffspring
+## 5   1 10002 10004 parentOffspring
+## 6   1 10003 10004         fullSib</code></pre>
+</div>
+<div id="geno_genera" class="section level4">
+<h4>geno_genera()</h4>
+<p>This function is to simulate the genotypes data. With the input family file and the number of SNPs, it would create the genotypes file. At each SNP, the minor allel frequency is sampled from the <strong>runif()</strong> with <strong>minimum = 0.1</strong>. And the genotypes of every individual is regulated by the Mendel’s Law of Genetics. The out put is a list here. the first element is the bed file consisting the original fam file, the phenotyps (by default set -9 as not known) and the genotypes data. Here each column of the genotypes is simplified as three classes: 0, 1, 2 standing for the number of the minor allels in the individual’s genotype at this SNP. After changing one column of SNP here into two columns demonstrating whether the indivial owns the base at each SNP, then could the transcribed file be read as <strong>.ped</strong> file in the tool <strong>PLINK</strong>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">geno_genera &lt;-<span class="st"> </span><span class="cf">function</span> (text , m){</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(text[,<span class="dv">1</span>]))</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  text[,<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(text[,<span class="dv">1</span>]))</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  text[,<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(text[,<span class="dv">2</span>]))</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">  text[,<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(text[,<span class="dv">3</span>]))</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">  text[,<span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(text[,<span class="dv">4</span>]))</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">  text[,<span class="dv">5</span>] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(text[,<span class="dv">5</span>]))</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">  outbed &lt;-<span class="st"> </span><span class="kw">integer</span>()</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">  pm &lt;-<span class="st"> </span><span class="kw">runif</span>(m,<span class="fl">0.1</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n){</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">    no.fam &lt;-<span class="st"> </span><span class="kw">unique</span>(text[,<span class="dv">1</span>])[j]</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">    l.fam &lt;-<span class="st"> </span>text[<span class="kw">which</span>(text[,<span class="dv">1</span>]<span class="op">==</span>no.fam),<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">    iid &lt;-<span class="st"> </span>l.fam[<span class="kw">order</span>(l.fam)]</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">    fid &lt;-<span class="st"> </span><span class="kw">rep</span>(no.fam,<span class="kw">length</span>(l.fam))</a>
+<a class="sourceLine" id="cb7-15" data-line-number="15">    bed &lt;-<span class="st"> </span><span class="kw">cbind</span>(fid, iid)</a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>m){</a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">      p &lt;-<span class="st"> </span>pm[i]</a>
+<a class="sourceLine" id="cb7-18" data-line-number="18">      <span class="co">## p : the MAF of one SNP</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19">      </a>
+<a class="sourceLine" id="cb7-20" data-line-number="20">      AA &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>p)<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21">      Aa &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>p<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p)</a>
+<a class="sourceLine" id="cb7-22" data-line-number="22">      aa &lt;-<span class="st"> </span>p<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23">      prob &lt;-<span class="st"> </span><span class="kw">c</span>(AA<span class="op">^</span><span class="dv">2</span>, AA<span class="op">*</span>Aa,AA<span class="op">*</span>aa,Aa<span class="op">*</span>AA,Aa<span class="op">*</span>Aa,Aa<span class="op">*</span>aa,aa<span class="op">*</span>aa)</a>
+<a class="sourceLine" id="cb7-24" data-line-number="24">      </a>
+<a class="sourceLine" id="cb7-25" data-line-number="25">      pairs &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">7</span></a>
+<a class="sourceLine" id="cb7-26" data-line-number="26">      parent &lt;-<span class="st"> </span><span class="kw">sample</span> (pairs, <span class="dv">1</span>,<span class="dt">prob=</span>prob)</a>
+<a class="sourceLine" id="cb7-27" data-line-number="27">      <span class="cf">if</span>(parent<span class="op">==</span><span class="dv">1</span>) father &lt;-<span class="st"> </span>mother &lt;-<span class="st"> </span>kid1 &lt;-<span class="st"> </span>kid2 &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb7-28" data-line-number="28">      <span class="cf">if</span>(parent<span class="op">==</span><span class="dv">2</span>) {</a>
+<a class="sourceLine" id="cb7-29" data-line-number="29">        father &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb7-30" data-line-number="30">        mother &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb7-31" data-line-number="31">        kid1 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb7-32" data-line-number="32">        kid2 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb7-33" data-line-number="33">      }</a>
+<a class="sourceLine" id="cb7-34" data-line-number="34">      <span class="cf">if</span>(parent<span class="op">==</span><span class="dv">3</span>){</a>
+<a class="sourceLine" id="cb7-35" data-line-number="35">        father &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb7-36" data-line-number="36">        mother &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb7-37" data-line-number="37">        kid1 &lt;-<span class="st"> </span>kid2 &lt;-<span class="dv">1</span></a>
+<a class="sourceLine" id="cb7-38" data-line-number="38">      }</a>
+<a class="sourceLine" id="cb7-39" data-line-number="39">      <span class="cf">if</span>(parent<span class="op">==</span><span class="dv">4</span>){</a>
+<a class="sourceLine" id="cb7-40" data-line-number="40">        father &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb7-41" data-line-number="41">        mother &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb7-42" data-line-number="42">        kid1 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb7-43" data-line-number="43">        kid2 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb7-44" data-line-number="44">      }</a>
+<a class="sourceLine" id="cb7-45" data-line-number="45">      <span class="cf">if</span>(parent<span class="op">==</span><span class="dv">5</span>){</a>
+<a class="sourceLine" id="cb7-46" data-line-number="46">        father &lt;-<span class="st"> </span>mother &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb7-47" data-line-number="47">        kid1 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dt">prob=</span><span class="kw">c</span>(<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.25</span>))</a>
+<a class="sourceLine" id="cb7-48" data-line-number="48">        kid2 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dt">prob=</span><span class="kw">c</span>(<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.25</span>))</a>
+<a class="sourceLine" id="cb7-49" data-line-number="49">      }</a>
+<a class="sourceLine" id="cb7-50" data-line-number="50">      <span class="cf">if</span>(parent<span class="op">==</span><span class="dv">6</span>){</a>
+<a class="sourceLine" id="cb7-51" data-line-number="51">        father &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb7-52" data-line-number="52">        mother &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb7-53" data-line-number="53">        kid1 &lt;-<span class="st"> </span><span class="kw">sample</span> (<span class="dv">1</span><span class="op">:</span><span class="dv">2</span> , <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb7-54" data-line-number="54">        kid2 &lt;-<span class="st"> </span><span class="kw">sample</span> (<span class="dv">1</span><span class="op">:</span><span class="dv">2</span> , <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb7-55" data-line-number="55">      }</a>
+<a class="sourceLine" id="cb7-56" data-line-number="56">      <span class="cf">if</span>(parent<span class="op">==</span><span class="dv">7</span>) father &lt;-<span class="st"> </span>mother &lt;-<span class="st"> </span>kid1 &lt;-<span class="st"> </span>kid2 &lt;-<span class="dv">2</span></a>
+<a class="sourceLine" id="cb7-57" data-line-number="57">      snp &lt;-<span class="st"> </span><span class="kw">c</span>(father, mother ,kid1,kid2)</a>
+<a class="sourceLine" id="cb7-58" data-line-number="58">      bed &lt;-<span class="st"> </span><span class="kw">cbind</span>(bed,snp)</a>
+<a class="sourceLine" id="cb7-59" data-line-number="59">    }</a>
+<a class="sourceLine" id="cb7-60" data-line-number="60">    outbed &lt;-<span class="st"> </span><span class="kw">rbind</span>(outbed,bed)</a>
+<a class="sourceLine" id="cb7-61" data-line-number="61">  }</a>
+<a class="sourceLine" id="cb7-62" data-line-number="62">  <span class="kw">colnames</span>(outbed) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;fid&quot;</span>,<span class="st">&quot;iid&quot;</span>,<span class="kw">paste0</span>(<span class="st">&quot;snp&quot;</span>,<span class="dv">1</span><span class="op">:</span>m))</a>
+<a class="sourceLine" id="cb7-63" data-line-number="63">  phenotype &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="op">-</span><span class="dv">9</span>,<span class="kw">nrow</span>(outbed))</a>
+<a class="sourceLine" id="cb7-64" data-line-number="64">  outbed0 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(text[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],phenotype,outbed[,<span class="dv">3</span><span class="op">:</span><span class="kw">ncol</span>(outbed)])</a>
+<a class="sourceLine" id="cb7-65" data-line-number="65">  l &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb7-66" data-line-number="66">  l<span class="op">$</span>bed &lt;-outbed0</a>
+<a class="sourceLine" id="cb7-67" data-line-number="67">  l<span class="op">$</span>maf &lt;-<span class="st"> </span>pm</a>
+<a class="sourceLine" id="cb7-68" data-line-number="68">  <span class="kw">return</span>(l)</a>
+<a class="sourceLine" id="cb7-69" data-line-number="69">}</a></code></pre></div>
+<p>Here, use the <strong>result</strong> by <strong>fam_genera()</strong> and set <strong>m=100</strong>, then show the <strong>head(geno)</strong>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">library</span>(SC19036)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">m &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">geno &lt;-<span class="st"> </span><span class="kw">geno_genera</span>(result,m)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw">head</span>(geno[[<span class="dv">1</span>]],<span class="dv">5</span>)[,<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>]</a></code></pre></div>
+<pre><code>##     fid   iid   pid   mid sex phenotype snp1 snp2 snp3 snp4 snp5 snp6
+## 1     1 10001     0     0   1        -9    1    0    0    0    0    1
+## 51    1 10002     0     0   2        -9    1    1    0    2    0    2
+## 101   1 10003 10001 10002   2        -9    0    1    0    1    0    2
+## 151   1 10004 10001 10002   1        -9    0    1    0    1    0    1
+## 2     2 20001     0     0   1        -9    0    1    0    1    1    1</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">head</span>(geno[[<span class="dv">2</span>]],<span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##  [1] 0.6039732 0.3954203 0.1430541 0.6194181 0.2861575 0.3264848 0.2254647
+##  [8] 0.8981394 0.6456992 0.2363548</code></pre>
+</div>
+<div id="erm_genera" class="section level4">
+<h4>ERM_genera()</h4>
+<p>This file is based on the idea put forward by <strong>Xia, C. et al. Pedigree- and SNP-associated genetics and recent environment are the major contributors to anthropometric and cardiometabolic trait variation. PLoS. Genet. 12, e1005804 (2016)</strong>. The idea is to make the environment relationship matrix from three different aspects: family aspect, an impact on both of the parent and the child; couple aspect, the impact on both of the couples, here the parents; fullsibling aspect, the impact on both of the fullsiblings. And for each environment aspect, we can generate the environment relationship matrix. With <strong>n</strong> individuals all over, then we can get the matrix with n plus n. And the diagonal entry is 1 while the non-diagonal entry is 1 only if the row individual and the column individual is some relaship according to the environment relationship matrix. For example, the couple ERM would be 1 in the non-diagonal entry where the relathionship between the two individuals is couple relationship.</p>
+<p>And the output is a list consisting of six files. For each impact, there exist two files: one is the environment relationship matrix, the other one is the id information. And the matrix file could be saved and renamed as <strong>.grm.gz</strong> to be used in the <strong>GCTA</strong> tool while the id file could be saved and renamed ad <strong>.grm.id</strong> to be used in the <strong>GCTA</strong> tool. With that, the Variance Component analysis according to the model in <strong>Xia(2016)</strong> can be analyzed.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">ERM_genera &lt;-<span class="st"> </span><span class="cf">function</span>(text){</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">  fam_file &lt;-<span class="st"> </span>text</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">  fam_file &lt;-<span class="st"> </span>fam_file[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">  <span class="kw">names</span>(fam_file) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;FID&quot;</span>, <span class="st">&quot;IID&quot;</span>)</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">  fam_file<span class="op">$</span>order &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(fam_file)</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">  rel &lt;-<span class="st"> </span>re[, <span class="kw">c</span>( <span class="dv">2</span>,<span class="dv">3</span>, <span class="kw">ncol</span>(re))]</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">  <span class="kw">names</span>(rel) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;IID_1&quot;</span>, <span class="st">&quot;IID_2&quot;</span>, <span class="st">&quot;relationship&quot;</span>)</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">  rel2 &lt;-<span class="st"> </span>rel[,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>)]</a>
+<a class="sourceLine" id="cb12-9" data-line-number="9">  <span class="kw">names</span>(rel2) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;IID_1&quot;</span>, <span class="st">&quot;IID_2&quot;</span>, <span class="st">&quot;relationship&quot;</span>)</a>
+<a class="sourceLine" id="cb12-10" data-line-number="10">  rel &lt;-<span class="st"> </span><span class="kw">rbind</span>(rel, rel2)</a>
+<a class="sourceLine" id="cb12-11" data-line-number="11">  </a>
+<a class="sourceLine" id="cb12-12" data-line-number="12">  rel &lt;-<span class="st"> </span><span class="kw">merge</span>(rel, fam_file[,<span class="kw">c</span>(<span class="st">&quot;IID&quot;</span>, <span class="st">&quot;order&quot;</span>)], <span class="dt">by.x=</span><span class="st">&quot;IID_1&quot;</span>, <span class="dt">by.y=</span><span class="st">&quot;IID&quot;</span>)</a>
+<a class="sourceLine" id="cb12-13" data-line-number="13">  rel &lt;-<span class="st"> </span><span class="kw">merge</span>(rel, fam_file[,<span class="kw">c</span>(<span class="st">&quot;IID&quot;</span>, <span class="st">&quot;order&quot;</span>)], <span class="dt">by.x=</span><span class="st">&quot;IID_2&quot;</span>, <span class="dt">by.y=</span><span class="st">&quot;IID&quot;</span>)</a>
+<a class="sourceLine" id="cb12-14" data-line-number="14">  rel &lt;-<span class="st"> </span>rel[, <span class="kw">c</span>(<span class="st">&quot;IID_1&quot;</span>, <span class="st">&quot;IID_2&quot;</span>, <span class="st">&quot;relationship&quot;</span>, <span class="st">&quot;order.x&quot;</span>, <span class="st">&quot;order.y&quot;</span>)]</a>
+<a class="sourceLine" id="cb12-15" data-line-number="15">  rel &lt;-<span class="st"> </span>rel[<span class="kw">order</span>(rel<span class="op">$</span>order.x, rel<span class="op">$</span>order.y), ]</a>
+<a class="sourceLine" id="cb12-16" data-line-number="16">  <span class="kw">sum</span>(rel<span class="op">$</span>order.x <span class="op">&gt;=</span><span class="st"> </span>rel<span class="op">$</span>order.y)</a>
+<a class="sourceLine" id="cb12-17" data-line-number="17">  rel &lt;-<span class="st"> </span>rel[rel<span class="op">$</span>order.x <span class="op">&gt;</span><span class="st"> </span>rel<span class="op">$</span>order.y, ]</a>
+<a class="sourceLine" id="cb12-18" data-line-number="18">  </a>
+<a class="sourceLine" id="cb12-19" data-line-number="19">  n &lt;-<span class="st"> </span><span class="kw">nrow</span>(fam_file)</a>
+<a class="sourceLine" id="cb12-20" data-line-number="20">  <span class="co">### environment family</span></a>
+<a class="sourceLine" id="cb12-21" data-line-number="21">  rel<span class="op">$</span>coef &lt;-<span class="st"> </span><span class="dv">0</span> </a>
+<a class="sourceLine" id="cb12-22" data-line-number="22">  rel[rel<span class="op">$</span>relationship <span class="op">==</span><span class="st"> &quot;parentOffspring&quot;</span>, <span class="st">&quot;coef&quot;</span>] &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co">## hudie set  ##original 0.5</span></a>
+<a class="sourceLine" id="cb12-23" data-line-number="23">  rel[rel<span class="op">$</span>relationship <span class="op">==</span><span class="st"> &quot;couple&quot;</span>, <span class="st">&quot;coef&quot;</span>] &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co">## hudie set  ##original 0.5</span></a>
+<a class="sourceLine" id="cb12-24" data-line-number="24">  rel[rel<span class="op">$</span>relationship <span class="op">==</span><span class="st"> &quot;fullSib&quot;</span>, <span class="st">&quot;coef&quot;</span>] &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co">## hudie set  ##original 0.5</span></a>
+<a class="sourceLine" id="cb12-25" data-line-number="25">  x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</a>
+<a class="sourceLine" id="cb12-26" data-line-number="26">  y &lt;-<span class="dv">1</span><span class="op">:</span>n</a>
+<a class="sourceLine" id="cb12-27" data-line-number="27">  xy1 &lt;-<span class="st"> </span>xy2 &lt;-<span class="st"> </span><span class="kw">numeric</span>()</a>
+<a class="sourceLine" id="cb12-28" data-line-number="28">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(n<span class="dv">-1</span>)){</a>
+<a class="sourceLine" id="cb12-29" data-line-number="29">    <span class="cf">for</span>(j <span class="cf">in</span> (i<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span>n) {</a>
+<a class="sourceLine" id="cb12-30" data-line-number="30">      xy1 &lt;-<span class="st"> </span><span class="kw">c</span>(xy1,x[i])</a>
+<a class="sourceLine" id="cb12-31" data-line-number="31">      xy2 &lt;-<span class="st"> </span><span class="kw">c</span>(xy2,y[j])</a>
+<a class="sourceLine" id="cb12-32" data-line-number="32">    }</a>
+<a class="sourceLine" id="cb12-33" data-line-number="33">  }</a>
+<a class="sourceLine" id="cb12-34" data-line-number="34">  xy &lt;-<span class="st"> </span><span class="kw">cbind</span>(xy1,xy2)</a>
+<a class="sourceLine" id="cb12-35" data-line-number="35">  <span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(<span class="kw">unique</span>(rel<span class="op">$</span>order.x))){</a>
+<a class="sourceLine" id="cb12-36" data-line-number="36">    a &lt;-<span class="st"> </span><span class="kw">unique</span>(rel<span class="op">$</span>order.x)[i]</a>
+<a class="sourceLine" id="cb12-37" data-line-number="37">    b &lt;-<span class="st"> </span>rel[<span class="kw">which</span>(rel<span class="op">$</span>order.x<span class="op">==</span>a),<span class="st">&quot;order.y&quot;</span>]</a>
+<a class="sourceLine" id="cb12-38" data-line-number="38">    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(b)){</a>
+<a class="sourceLine" id="cb12-39" data-line-number="39">      xy &lt;-<span class="st"> </span>xy[<span class="op">-</span><span class="kw">which</span>(xy[,<span class="dv">2</span>]<span class="op">==</span>a <span class="op">&amp;</span><span class="st"> </span>xy[,<span class="dv">1</span>]<span class="op">==</span>b[j]),]</a>
+<a class="sourceLine" id="cb12-40" data-line-number="40">    }</a>
+<a class="sourceLine" id="cb12-41" data-line-number="41">  }</a>
+<a class="sourceLine" id="cb12-42" data-line-number="42">  </a>
+<a class="sourceLine" id="cb12-43" data-line-number="43">  order.x &lt;-<span class="st"> </span><span class="kw">c</span>(rel<span class="op">$</span>order.x,xy[,<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb12-44" data-line-number="44">  order.y &lt;-<span class="st"> </span><span class="kw">c</span>(rel<span class="op">$</span>order.y,xy[,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb12-45" data-line-number="45">  relationship &lt;-<span class="st"> </span><span class="kw">c</span>(rel<span class="op">$</span>coef,<span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">length</span>(order.x)<span class="op">-</span><span class="kw">length</span>(rel<span class="op">$</span>coef)))</a>
+<a class="sourceLine" id="cb12-46" data-line-number="46">  order.x &lt;-<span class="st"> </span><span class="kw">c</span>(order.x,<span class="dv">1</span><span class="op">:</span>n)<span class="co">##add the diagnal entry</span></a>
+<a class="sourceLine" id="cb12-47" data-line-number="47">  order.y &lt;-<span class="st"> </span><span class="kw">c</span>(order.y,<span class="dv">1</span><span class="op">:</span>n)</a>
+<a class="sourceLine" id="cb12-48" data-line-number="48">  </a>
+<a class="sourceLine" id="cb12-49" data-line-number="49">  relationship &lt;-<span class="st"> </span><span class="kw">c</span>(relationship,<span class="kw">rep</span>(<span class="dv">1</span>,n))</a>
+<a class="sourceLine" id="cb12-50" data-line-number="50">  snp &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">500</span>,<span class="kw">length</span>(order.x))</a>
+<a class="sourceLine" id="cb12-51" data-line-number="51">  matrix_family &lt;-<span class="st"> </span><span class="kw">data.frame</span>(order.x, order.y, snp,relationship)</a>
+<a class="sourceLine" id="cb12-52" data-line-number="52">  matrix_family_id &lt;-<span class="st"> </span><span class="kw">data.frame</span>(order.x, order.y, snp,relationship)</a>
+<a class="sourceLine" id="cb12-53" data-line-number="53">  </a>
+<a class="sourceLine" id="cb12-54" data-line-number="54">  <span class="co">###environment couple</span></a>
+<a class="sourceLine" id="cb12-55" data-line-number="55">  rel<span class="op">$</span>coef &lt;-<span class="st"> </span><span class="dv">0</span> </a>
+<a class="sourceLine" id="cb12-56" data-line-number="56">  rel[rel<span class="op">$</span>relationship <span class="op">==</span><span class="st"> &quot;couple&quot;</span>, <span class="st">&quot;coef&quot;</span>] &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co">##hudie-set </span></a>
+<a class="sourceLine" id="cb12-57" data-line-number="57">  x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</a>
+<a class="sourceLine" id="cb12-58" data-line-number="58">  y &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</a>
+<a class="sourceLine" id="cb12-59" data-line-number="59">  xy1 &lt;-<span class="st"> </span>xy2 &lt;-<span class="st"> </span><span class="kw">numeric</span>()</a>
+<a class="sourceLine" id="cb12-60" data-line-number="60">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(n<span class="dv">-1</span>)){</a>
+<a class="sourceLine" id="cb12-61" data-line-number="61">    <span class="cf">for</span>(j <span class="cf">in</span> (i<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span>n) {</a>
+<a class="sourceLine" id="cb12-62" data-line-number="62">      xy1=<span class="kw">c</span>(xy1,x[i])</a>
+<a class="sourceLine" id="cb12-63" data-line-number="63">      xy2=<span class="kw">c</span>(xy2,y[j])</a>
+<a class="sourceLine" id="cb12-64" data-line-number="64">    }</a>
+<a class="sourceLine" id="cb12-65" data-line-number="65">  }</a>
+<a class="sourceLine" id="cb12-66" data-line-number="66">  xy &lt;-<span class="st"> </span><span class="kw">cbind</span>(xy1,xy2)</a>
+<a class="sourceLine" id="cb12-67" data-line-number="67">  <span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(<span class="kw">unique</span>(rel<span class="op">$</span>order.x))){</a>
+<a class="sourceLine" id="cb12-68" data-line-number="68">    a &lt;-<span class="st"> </span><span class="kw">unique</span>(rel<span class="op">$</span>order.x)[i]</a>
+<a class="sourceLine" id="cb12-69" data-line-number="69">    b &lt;-<span class="st"> </span>rel[<span class="kw">which</span>(rel<span class="op">$</span>order.x<span class="op">==</span>a),<span class="st">&quot;order.y&quot;</span>]</a>
+<a class="sourceLine" id="cb12-70" data-line-number="70">    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(b)){</a>
+<a class="sourceLine" id="cb12-71" data-line-number="71">      xy &lt;-<span class="st"> </span>xy[<span class="op">-</span><span class="kw">which</span>(xy[,<span class="dv">2</span>]<span class="op">==</span>a <span class="op">&amp;</span><span class="st"> </span>xy[,<span class="dv">1</span>]<span class="op">==</span>b[j]),]</a>
+<a class="sourceLine" id="cb12-72" data-line-number="72">    }</a>
+<a class="sourceLine" id="cb12-73" data-line-number="73">  }</a>
+<a class="sourceLine" id="cb12-74" data-line-number="74">  </a>
+<a class="sourceLine" id="cb12-75" data-line-number="75">  order.x &lt;-<span class="st"> </span><span class="kw">c</span>(rel<span class="op">$</span>order.x,xy[,<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb12-76" data-line-number="76">  order.y &lt;-<span class="st"> </span><span class="kw">c</span>(rel<span class="op">$</span>order.y,xy[,<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb12-77" data-line-number="77">  relationship &lt;-<span class="st"> </span><span class="kw">c</span>(rel<span class="op">$</span>coef,<span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">length</span>(order.x)<span class="op">-</span><span class="kw">length</span>(rel<span class="op">$</span>coef)))</a>
+<a class="sourceLine" id="cb12-78" data-line-number="78">  order.x &lt;-<span class="st"> </span><span class="kw">c</span>(order.x,<span class="dv">1</span><span class="op">:</span>n)<span class="co">##add the diagnal entry</span></a>
+<a class="sourceLine" id="cb12-79" data-line-number="79">  order.y &lt;-<span class="st"> </span><span class="kw">c</span>(order.y,<span class="dv">1</span><span class="op">:</span>n)</a>
+<a class="sourceLine" id="cb12-80" data-line-number="80">  </a>
+<a class="sourceLine" id="cb12-81" data-line-number="81">  relationship &lt;-<span class="st"> </span><span class="kw">c</span>(relationship,<span class="kw">rep</span>(<span class="dv">1</span>,n))</a>
+<a class="sourceLine" id="cb12-82" data-line-number="82">  snp &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">500</span>,<span class="kw">length</span>(order.x))</a>
+<a class="sourceLine" id="cb12-83" data-line-number="83">  matrix_couple &lt;-<span class="st"> </span><span class="kw">data.frame</span>(order.x, order.y, snp,relationship)</a>
+<a class="sourceLine" id="cb12-84" data-line-number="84">  matrix_couple_id &lt;-<span class="st"> </span><span class="kw">data.frame</span>(order.x, order.y, snp,relationship)</a>
+<a class="sourceLine" id="cb12-85" data-line-number="85">  </a>
+<a class="sourceLine" id="cb12-86" data-line-number="86">  </a>
+<a class="sourceLine" id="cb12-87" data-line-number="87">  <span class="co">##environment full-sibling</span></a>
+<a class="sourceLine" id="cb12-88" data-line-number="88">  rel<span class="op">$</span>coef &lt;-<span class="st"> </span><span class="dv">0</span> </a>
+<a class="sourceLine" id="cb12-89" data-line-number="89">  rel[rel<span class="op">$</span>relationship <span class="op">==</span><span class="st"> &quot;fullSib&quot;</span>, <span class="st">&quot;coef&quot;</span>] &lt;-<span class="st"> </span><span class="dv">1</span><span class="co">## hudie set  ##original 0.5</span></a>
+<a class="sourceLine" id="cb12-90" data-line-number="90">  x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</a>
+<a class="sourceLine" id="cb12-91" data-line-number="91">  y &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</a>
+<a class="sourceLine" id="cb12-92" data-line-number="92">  xy1 &lt;-<span class="st"> </span>xy2 &lt;-<span class="st"> </span><span class="kw">numeric</span>()</a>
+<a class="sourceLine" id="cb12-93" data-line-number="93">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(n<span class="dv">-1</span>)){</a>
+<a class="sourceLine" id="cb12-94" data-line-number="94">    <span class="cf">for</span>(j <span class="cf">in</span> (i<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span>n) {</a>
+<a class="sourceLine" id="cb12-95" data-line-number="95">      xy1 &lt;-<span class="st"> </span><span class="kw">c</span>(xy1,x[i])</a>
+<a class="sourceLine" id="cb12-96" data-line-number="96">      xy2 &lt;-<span class="st"> </span><span class="kw">c</span>(xy2,y[j])</a>
+<a class="sourceLine" id="cb12-97" data-line-number="97">    }</a>
+<a class="sourceLine" id="cb12-98" data-line-number="98">  }</a>
+<a class="sourceLine" id="cb12-99" data-line-number="99">  xy &lt;-<span class="st"> </span><span class="kw">cbind</span>(xy1,xy2)</a>
+<a class="sourceLine" id="cb12-100" data-line-number="100">  <span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(<span class="kw">unique</span>(rel<span class="op">$</span>order.x))){</a>
+<a class="sourceLine" id="cb12-101" data-line-number="101">    a &lt;-<span class="st"> </span><span class="kw">unique</span>(rel<span class="op">$</span>order.x)[i]</a>
+<a class="sourceLine" id="cb12-102" data-line-number="102">    b &lt;-<span class="st"> </span>rel[<span class="kw">which</span>(rel<span class="op">$</span>order.x<span class="op">==</span>a),<span class="st">&quot;order.y&quot;</span>]</a>
+<a class="sourceLine" id="cb12-103" data-line-number="103">    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(b)){</a>
+<a class="sourceLine" id="cb12-104" data-line-number="104">      xy &lt;-<span class="st"> </span>xy[<span class="op">-</span><span class="kw">which</span>(xy[,<span class="dv">2</span>]<span class="op">==</span>a <span class="op">&amp;</span><span class="st"> </span>xy[,<span class="dv">1</span>]<span class="op">==</span>b[j]),]</a>
+<a class="sourceLine" id="cb12-105" data-line-number="105">    }</a>
+<a class="sourceLine" id="cb12-106" data-line-number="106">  }</a>
+<a class="sourceLine" id="cb12-107" data-line-number="107">  </a>
+<a class="sourceLine" id="cb12-108" data-line-number="108">  order.x &lt;-<span class="st"> </span><span class="kw">c</span>(rel<span class="op">$</span>order.x,xy[,<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb12-109" data-line-number="109">  order.y &lt;-<span class="st"> </span><span class="kw">c</span>(rel<span class="op">$</span>order.y,xy[,<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb12-110" data-line-number="110">  relationship &lt;-<span class="st"> </span><span class="kw">c</span>(rel<span class="op">$</span>coef,<span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">length</span>(order.x)<span class="op">-</span><span class="kw">length</span>(rel<span class="op">$</span>coef)))</a>
+<a class="sourceLine" id="cb12-111" data-line-number="111">  order.x &lt;-<span class="st"> </span><span class="kw">c</span>(order.x,<span class="dv">1</span><span class="op">:</span>n)<span class="co">##add the diagnal entry</span></a>
+<a class="sourceLine" id="cb12-112" data-line-number="112">  order.y &lt;-<span class="st"> </span><span class="kw">c</span>(order.y,<span class="dv">1</span><span class="op">:</span>n)</a>
+<a class="sourceLine" id="cb12-113" data-line-number="113">  </a>
+<a class="sourceLine" id="cb12-114" data-line-number="114">  relationship &lt;-<span class="st"> </span><span class="kw">c</span>(relationship,<span class="kw">rep</span>(<span class="dv">1</span>,n))</a>
+<a class="sourceLine" id="cb12-115" data-line-number="115">  snp &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">500</span>,<span class="kw">length</span>(order.x))</a>
+<a class="sourceLine" id="cb12-116" data-line-number="116">  matrix_fullsilb &lt;-<span class="st"> </span><span class="kw">data.frame</span>(order.x, order.y, snp,relationship)</a>
+<a class="sourceLine" id="cb12-117" data-line-number="117">  matrix_fullsilb_id &lt;-<span class="st"> </span><span class="kw">data.frame</span>(order.x, order.y, snp,relationship)</a>
+<a class="sourceLine" id="cb12-118" data-line-number="118">  </a>
+<a class="sourceLine" id="cb12-119" data-line-number="119">  l &lt;-<span class="st"> </span><span class="kw">list</span>(matrix_family,matrix_family_id,matrix_couple,matrix_couple_id,matrix_fullsilb,matrix_fullsilb_id)</a>
+<a class="sourceLine" id="cb12-120" data-line-number="120">  <span class="kw">return</span>(l)</a>
+<a class="sourceLine" id="cb12-121" data-line-number="121">  }</a></code></pre></div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
