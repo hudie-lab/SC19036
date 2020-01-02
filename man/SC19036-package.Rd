@@ -1,34 +1,17 @@
 \name{SC19036-package}
 \alias{SC19036-package}
-\alias{SC19036}
 \docType{package}
 \title{
-  A short title line describing what the package does
+  The R Package for StatComp
 }
 \description{
-  A more detailed description of what the package does. A length
-  of about one to five lines is recommended.
+  The R package is for statistics computing curriculum containing all the homework answers from the course by Hu Die.
 }
 \details{
-  This section should provide a more detailed overview of how to use the
-  package, including the most important functions.
+  The main part of the package is the homework answers for each course by Hu Die. And the functions in the homework would be listed with the details of each function.
 }
 \author{
-Your Name, email optional.
+Hu Die
 
-Maintainer: Your Name <your@email.com>
-}
-\references{
-  This optional section can contain literature or other references for
-  background information.
-}
-\keyword{ package }
-\seealso{
-  Optional links to other man pages
-}
-\examples{
-  \dontrun{
-     ## Optional simple examples of the most important functions
-     ## These can be in \dontrun{} and \donttest{} blocks.   
-  }
+Maintainer: Hu Die <janehoe@mail.ustc.edu.cn>
 }
